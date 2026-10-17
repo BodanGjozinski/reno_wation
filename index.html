@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RenovateBySeeing</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%224%22 fill=%22%23b5643c%22/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <header class="brand">
+        <span class="brand-mark"></span>
+        <span>RenovateBySeeing</span>
+      </header>
+
+      <div class="sidebar-actions">
+        <button id="add-scene" class="btn primary">Add scene</button>
+        <button id="load-sample" class="btn ghost">Try the sample room</button>
+        <input id="file-input" type="file" accept=".ply,.spz,.splat,.ksplat" hidden />
+      </div>
+
+      <h2 class="section-label">Your scenes</h2>
+      <ul id="library" class="library"></ul>
+      <p id="library-empty" class="muted small">
+        Scenes you add are kept in this browser. Export them from Postshot or Brush as SPZ or PLY.
+      </p>
+    </aside>
+
+    <main class="stage">
+      <div id="viewport" class="viewport"></div>
+
+      <div id="empty" class="empty">
+        <div class="empty-card">
+          <h1>Drop a scene here</h1>
+          <p class="muted">PLY, SPZ, SPLAT or KSPLAT from Postshot or Brush.</p>
+          <button id="empty-add" class="btn primary">Choose a file</button>
+        </div>
+      </div>
+
+      <div id="loading" class="loading" hidden>
+        <div class="spinner"></div>
+        <span id="loading-text">Loading scene</span>
+      </div>
+
+      <nav id="toolbar" class="toolbar" hidden>
+        <button class="tool" data-tool="upright" title="Flip the scene upright">Upright</button>
+        <button class="tool" data-tool="measure" title="Set real-world scale from two points">Set scale</button>
+        <span class="divider"></span>
+        <button class="tool" data-tool="paint" title="Add a zone that recolours what is inside it">Paint zone</button>
+        <button class="tool" data-tool="hide" title="Add a zone that hides what is inside it">Hide zone</button>
+        <span class="divider"></span>
+        <button class="tool" data-tool="reset" title="Frame the whole scene">Reset view</button>
+      </nav>
+
+      <div id="hint" class="hint" hidden></div>
+
+      <section id="zone-panel" class="panel" hidden>
+        <header class="panel-head">
+          <strong id="zone-title">Zone</strong>
+          <button id="zone-close" class="icon-btn" aria-label="Close">×</button>
+        </header>
+        <label class="field" id="zone-color-field">
+          <span>Colour</span>
+          <input id="zone-color" type="color" value="#c8b8a6" />
+        </label>
+        <div class="field">
+          <span>Adjust</span>
+          <div class="segmented" id="zone-mode">
+            <button data-mode="translate" class="active">Move</button>
+            <button data-mode="scale">Size</button>
+            <button data-mode="rotate">Turn</button>
+          </div>
+        </div>
+        <button id="zone-delete" class="btn danger">Delete zone</button>
+      </section>
+
+      <div id="scale-badge" class="scale-badge" hidden></div>
+    </main>
+
+    <dialog id="measure-dialog" class="dialog">
+      <form method="dialog">
+        <h3>How far apart are those two points?</h3>
+        <p class="muted small" id="measure-current"></p>
+        <label class="field">
+          <span>Real distance in metres</span>
+          <input id="measure-input" type="number" min="0.01" step="0.01" required />
+        </label>
+        <div class="dialog-actions">
+          <button value="cancel" formnovalidate class="btn ghost">Cancel</button>
+          <button value="ok" class="btn primary">Apply scale</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" hidden></div>
+    <div id="drop-overlay" class="drop-overlay" hidden><span>Drop to add scene</span></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
