@@ -4,6 +4,8 @@ A personal web app for viewing a captured room in 3D and trying changes on it.
 This first piece is the scene viewer: it opens the Gaussian splat files that
 Postshot or Brush export and lets you work on them in the browser.
 
+![A paint zone recolouring part of the sample room](docs/screenshot.png)
+
 ## What it does
 
 - **Add scenes** by dropping a `.ply`, `.spz`, `.splat` or `.ksplat` file on the page.
